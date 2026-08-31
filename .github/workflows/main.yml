@@ -5,31 +5,27 @@ on:
     branches:
       - main
 
-
-permissions: 
+permissions:
   contents: read
-  packages: write
+  pages: write
   id-token: write
 
-
 jobs:
- deploy:
-   runs-on: ubuntu-latest
-   steps:
-     - name: checkout code
-       uses: actions/checkout@v4
+  deploy:
+    runs-on: ubuntu-latest
 
-     - name: Setup pages
-       uses: actions/congigure-pages@v5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-     - name: Upload Artifacts
-       uses: actions/Uplopad-pages-artifacts@v3
-       with:
-       path: '.'
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-     - name: Deploy to GitHub Pages
-       id: deployment
-       uses: actions/deploy-pages@v4
+      - name: Upload website files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
 
-
-    
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
